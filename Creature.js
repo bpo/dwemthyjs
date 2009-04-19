@@ -6,17 +6,15 @@
 
 // _initialization_ is a custom constructor method for subclassing
 function Creature(initialization) {
-  self = this;
-  self._traits = {};
+  this._traits = {};
 
   // with no arguments, return all the traits
   // with arguments, add new traits
-  self.traits = function() {
-    if(arguments.length == 0) { return self._traits; }
-
+  this.traits = function() {
     for( var i = 0; i < arguments.length; i++ ) {
-      self[arguments[i]] = self.trait_function(arguments[i]);
+      this[arguments[i]] = this.trait_function(arguments[i]);
     }
+    return this._traits;
   }
 
   // Returns a new function for a trait
@@ -25,64 +23,40 @@ function Creature(initialization) {
   // value of the trait.
   // If called with an argument, it will set the trait to the
   // appropriate value.
-  self.trait_function = function(trait) {
-    f = function() {
-      if(arguments.length == 0) { return this._traits[trait] };
+  this.trait_function = function(trait) {
+    var f = function() {
+      if(arguments.length == 0) { return this._traits[trait]; }
 
-      val = arguments[0];
+      var val = arguments[0];
       this._traits[trait] = val;
+      return val;
     }
     return f;
   }
 
   // default traits shared by all creatures
-  self.traits("life", "strength", "charisma", "weapon");
+  this.traits("life", "strength", "charisma", "weapon");
   // call the custom constructor if necessary
   if(initialization) { initialization(); }
 }
 
-Rabbit = new Creature( function() {
-  self.traits("bombs");
-  self.life(10);
-  self.strength(2);
-  self.charisma(44);
-  self.weapon(4);
-  self.bombs(3);
-  });
+function Rabbit() {
+  var rabbit = new Creature();
+  rabbit.traits("bombs");
+  rabbit.life(10);
+  rabbit.strength(2);
+  rabbit.charisma(44);
+  rabbit.weapon(4);
+  rabbit.bombs(3);
+  return rabbit;
+}
 
 Rabbit.prototype = {
-
+  "^": function(enemy) { this.fight(enemy, 13); }
 }
 
 function debug() {
-  call_f(print, arguments)
+  print.apply(print, arguments)
 }
 
-function call_f(f,args)
-{
-  f.call_self = function(ars)
-  {
-    var callstr = "";
-    for(var i = 0; i < ars.length; i++)
-    {
-      callstr += "ars["+i+"]";
-      if(i < ars.length - 1)
-      {
-        callstr += ',';
-      }
-    }
-    eval("this("+callstr+")");
-  };
-
-  return f.call_self(args);
-}
-
-c = new Creature();
-c.traits("foo", "bar", "baz");
-
-c.foo(12);
-print("c.foo", c.foo());
-
-//print("c.foo", c.foo);
-//print("c.traits", c.traits());
-//call_f(print, c.traits());
+var r = new Rabbit();
