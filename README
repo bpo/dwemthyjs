@@ -1,0 +1,24 @@
+A port of Dwemthy's Array into JavaScript.
+
+See http://poignantguide.net/dwemthy/
+
+This is an exploration of metaprogramming in JavaScript, specifically
+trying to map familiar concepts from Ruby into JavaScript.
+
+How to play:
+   Load dwemthy.js into your favorite JavaScript console - it must
+   support __noSuchMethod__, so Rhino, SpiderMonkey, Firefox - these
+   are your best bets.
+
+   js> load("dwemthy.js");
+   js> var r = new Rabbit();
+   js> var da = new DwemthysArray().of(new IndustrialRaverMonkey(),
+                           new DwarvenAngel(),
+                           new AssistantViceTentacleAndOmbudsman(),
+                           new TeethDeer(),
+                           new IntrepidDecomposedCyclist(),
+                           new Dragon());
+   js> r.slice(da);
+
+   ...etc
+

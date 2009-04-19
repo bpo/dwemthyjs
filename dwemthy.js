@@ -1,24 +1,3 @@
-/*
- A port of Dwemthy's Array into JavaScript.
-
- How to play:
-   Load this script into your favorite JavaScript console - it must
-   support __noSuchMethod__, so Rhino, SpiderMonkey, Firefox - these
-   are your best bets.
-
-   js> load("dwemthy.js");
-   js> var r = new Rabbit();
-   js> var da = new DwemthysArray().of(new IndustrialRaverMonkey(),
-                           new DwarvenAngel(),
-                           new AssistantViceTentacleAndOmbudsman(),
-                           new TeethDeer(),
-                           new IntrepidDecomposedCyclist(),
-                           new Dragon());
-   js> r.slice(da);
-
-   ...etc
- */
-
 function Creature(name, traits) {
   global[name] = new Mob(name, traits);
 }
