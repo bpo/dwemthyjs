@@ -6,7 +6,7 @@
    support __noSuchMethod__, so Rhino, SpiderMonkey, Firefox - these
    are your best bets.
 
-   js> load("Dwemthy.js");
+   js> load("dwemthy.js");
    js> var r = new Rabbit();
    js> var da = new DwemthysArray().of(new IndustrialRaverMonkey(),
                            new DwarvenAngel(),
@@ -107,6 +107,11 @@ DwemthysArray.prototype = {
   }
 }
 
+function rand(n)
+{
+  return (Math.floor(Math.random()*n + 1));
+}
+
 Creature("Rabbit", {
   life: 10,
   strength: 2,
@@ -180,10 +185,3 @@ Creature("Dragon", {
   charisma: 1020,   // toothy smile
   weapon: 939       // fire breath
 });
-
-function rand(n)
-{
-  return (Math.floor(Math.random()*n + 1));
-}
-
-
