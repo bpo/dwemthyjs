@@ -17,6 +17,14 @@ function Creature(name) {
     return this._traits;
   }
 
+  // accepts a json structure of key-value pairs for traits
+  // we could just as easily substitute _traits for the argument passed here
+  this.set_traits = function(traits) {
+    for( var i in traits ) {
+      this[i].call(this, traits[i]);
+    }
+  }
+
   // Returns a new function for a trait
   //
   // When called without an argument, this function will return the
@@ -75,11 +83,13 @@ function Creature(name) {
 function Rabbit() {
   var rabbit = new Creature("Rabbit");
   rabbit.traits("bombs");
-  rabbit.life(10);
-  rabbit.strength(2);
-  rabbit.charisma(44);
-  rabbit.weapon(4);
-  rabbit.bombs(3);
+  rabbit.set_traits({
+    life: 10,
+    strength: 2,
+    charisma: 44,
+    weapon: 4,
+    bombs: 3
+  });
 
   // You could do something like rabbit["^"] to define a method with a
   // handle of ^ like the Ruby version, but a call to it would like
@@ -91,7 +101,7 @@ function Rabbit() {
     this.fight( enemy, rand( 4 + Math.pow((enemy.life() % 10), 2) ));
   }
   rabbit.taunt = function(enemy) {
-    boost = rand( this.charisma() );
+    var boost = rand( this.charisma() );
     print("[Taunting your enemy boosts your life points by " + boost + "!]");
     this.life(this.life() + boost);
   }
@@ -108,27 +118,19 @@ function Rabbit() {
   return rabbit;
 }
 
-
-/*Rabbit.prototype = {
-  "^": function(enemy) { this.fight(enemy, 13); },
-  yodel: function(enemy) { this.fight(enemy, 13); }
-}*/
-
 function IndustrialRaverMonkey() {
   var monkey = new Creature("IndustrialRaverMonkey");
-  monkey.life(46);
-  monkey.strength(35);
-  monkey.charisma(91);
-  monkey.weapon(2);
+  monkey.set_traits({
+    life: 46,
+    strength: 35,
+    charisma: 91,
+    weapon: 2
+  });
   return monkey;
 }
 
 function debug() {
   print.apply(print, arguments)
-}
-
-function puts(message) {
-  
 }
 
 function rand(n)
