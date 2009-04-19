@@ -1,9 +1,14 @@
+dwemthy.js
+
 A port of Dwemthy's Array into JavaScript.
+---
 
-See http://poignantguide.net/dwemthy/
+Why the Lucky Stiff created a fantastic example of Ruby
+metaprogramming with his "Dwemthy's Array". 
+  See http://poignantguide.net/dwemthy/
 
-This is an exploration of metaprogramming in JavaScript, specifically
-trying to map familiar concepts from Ruby into JavaScript.
+This is an exploration of how the same topics translate into
+JavaScript, for my own edification.
 
 How to play:
    Load dwemthy.js into your favorite JavaScript console - it must
