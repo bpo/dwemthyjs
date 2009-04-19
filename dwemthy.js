@@ -1,5 +1,5 @@
 function Creature(name, traits) {
-  global[name] = new Mob(name, traits);
+  this[name] = function() { return new Mob(name, traits) };
 }
 
 function Mob(name, traits) {
