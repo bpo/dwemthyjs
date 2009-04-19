@@ -54,7 +54,7 @@ function Creature(name) {
     }
 
     // Attack the opponent
-    var damage = rand( this.strength() + this.weapon() );
+    var damage = rand( this.strength() + weapon );
     print( "[You hit with " + damage + " points of damage!]" );
     enemy.hit( damage );
 
@@ -90,6 +90,20 @@ function Rabbit() {
   rabbit.slice = function(enemy) {
     this.fight( enemy, rand( 4 + Math.pow((enemy.life() % 10), 2) ));
   }
+  rabbit.taunt = function(enemy) {
+    boost = rand( this.charisma() );
+    print("[Taunting your enemy boosts your life points by " + boost + "!]");
+    this.life(this.life() + boost);
+  }
+  rabbit.explode = function(enemy) {
+    if( this.bombs() == 0 ) {
+      print("[UHN!! You're out of bombs!!]");
+      return false;
+    }
+    this.bombs(this.bombs() - 1);
+    this.fight( enemy, 86 );
+    return this;
+  }
 
   return rabbit;
 }
@@ -124,5 +138,13 @@ function rand(n)
 
 var r = new Rabbit();
 var m = new IndustrialRaverMonkey();
+r.taunt(m);
+r.taunt(m);
+r.taunt(m);
+r.taunt(m);
+r.explode(m);
+r.explode(m);
+r.explode(m);
+r.explode(m);
 r.kick(m);
 r.slice(m);
