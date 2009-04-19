@@ -54,12 +54,24 @@ DwemthysArray.prototype = {
   },
   first: function() { return this._contents[0] },
 
+  // all the properties the Array pulls from its Creatures go here
+  doppelgangers: [],
+
+  // when becoming a new Creature, the Array destroys all evidence of
+  // the previous Creature.
+  clean: function() {
+    for( var i in this.doppelgangers ) { delete this[this.doppelgangers[i]]; }
+    this.doppelgangers = [];
+  },
+
   // using this function, DwemthysArray actually "becomes" its first
   // Creature. Copy all the properties, and grab the functions also.
   // Functions written to a special namespace so the Array can react
   // above and beyond the way the Creature does.
   doppelgang: function() {
+    this.clean();
     for( var i in this.first() ) {
+      this.doppelgangers.push(i);
       if(typeof this.first()[i] != "function") {
         this[i] = this.first()[i];
       } else {
